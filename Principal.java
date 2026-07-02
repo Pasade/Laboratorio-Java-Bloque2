@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 public class Principal {
     
     public static void main(String[] args) {
@@ -8,7 +6,7 @@ public class Principal {
         Funciones.bienvenidaGestorEnvios();
 
         //Creamos un Array dinámico para poder meter los paquetes (Como si fuera un camión)
-        ArrayList<Paquete> listaDeEnvios = new ArrayList<>();
+        //ArrayList<Paquete> listaDeEnvios = new ArrayList<>();
 
         //Usamos el cosntructor para crear dos paquetes
         Paquete p1 = new Paquete(8.4, "Dallas");
@@ -22,7 +20,7 @@ public class Principal {
         // p1.mostrarDetalles();
 
         //Añadiremos los paquetes al Array dinámico
-        listaDeEnvios.addAll(List.of(p1,p2));
+        /*listaDeEnvios.addAll(List.of(p1,p2));
 
         //Mostramos todos los paquetes que hay en el Array
         System.out.println("\n🚚 LISTADO DE PAQUETES REGISTRADOS EN EL ARRAYLIST:");
@@ -56,7 +54,7 @@ public class Principal {
         else{
             //Indicamos cuantos elementos hay dentro del Array
             System.out.println("\nTotal de paquetes en el sistema elástico: " + listaDeEnvios.size() + "/10");
-        }        
+        }        */
         
 
     }

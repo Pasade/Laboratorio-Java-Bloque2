@@ -1,7 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Representa un vehículo de transporte logístico encargado de gestionar 
+ * y trasladar una colección de paquetes.
+ * <p>
+ * Esta clase centraliza las reglas de negocio para la carga, descarga,
+ * vaciado y diagnóstico de la lista de envíos, controlando los límites
+ * de capacidad máxima del vehículo.
+ * </p>
+ * * @author Jose Antonio Fernández Gago
+ * @version 1.0
+ */
 public class Camion{
-    //Creamos un Array dinámico para poder meter los paquetes (Como si fuera un camión)
     private ArrayList<Paquete> listaDeEnvios = new ArrayList<>();
     private String matricula;
     private int capacidad;
@@ -20,7 +31,9 @@ public class Camion{
         this.capacidad = capacidad;
     }
 
-    //Getters y setter
+    // ==========================================
+    // GETTERS Y SETTERS DOCUMENTADOS
+    // ==========================================
     /**
      * Obtiene la matrícula actual del camión.
      * * @return Un String que representa la matrícula identificativa del vehículo.
@@ -48,7 +61,7 @@ public class Camion{
      */
     public void setCapacidad(int nuevaCapacidad){
         if(nuevaCapacidad < 0){
-            System.out.println("La capacidad del camión no puede ser 0 on negativa");
+            System.err.println("La capacidad del camión no puede ser 0 on negativa");
         }
         else{
             this.capacidad = nuevaCapacidad;
@@ -69,7 +82,7 @@ public class Camion{
      */
     public void agregarPaquete(Paquete nuevoPaquete){
         if(listaDeEnvios.size() >= this.capacidad){
-            System.out.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d", this.capacidad, listaDeEnvios.size());
+            System.err.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d", this.capacidad, listaDeEnvios.size());
         }
         else{
             listaDeEnvios.add(nuevoPaquete);
@@ -89,7 +102,7 @@ public class Camion{
     public void agregarVariosPaquete(Paquete... nuevosPaquetes){
         int totalFuturoCarga = listaDeEnvios.size() + nuevosPaquetes.length;
         if(totalFuturoCarga > this.capacidad){
-            System.out.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d\n", this.capacidad, totalFuturoCarga);
+            System.err.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d\n", this.capacidad, totalFuturoCarga);
         }
         else{
             listaDeEnvios.addAll(List.of(nuevosPaquetes));
@@ -110,7 +123,7 @@ public class Camion{
      */
     public void quitarPaquete(Paquete viejoPaquete){
         if(!listaDeEnvios.contains(viejoPaquete)){
-            System.out.printf("El paquete que intentas eliminar no existe, actualmente hay este numero de paquetes %d\n", listaDeEnvios.size());
+            System.err.printf("El paquete que intentas eliminar no existe, actualmente hay este numero de paquetes %d\n", listaDeEnvios.size());
             mostrarDetallesPaquetesCamion();
         }
         else{
@@ -118,10 +131,17 @@ public class Camion{
         }
         
     }
-    //Metodo para borrar varios paquetes
+    /**
+     * Elimina varios paquetes del camión.
+     * <p>
+     * Primero verifica mediante {@code contains} si alguno de los paquetes existe en la carga. 
+     * En caso negativo, no altera la lista y muestra un aviso detallando el error y la carga actual.
+     * </p>
+     * * @param viejosPaquetes El objeto {@code Paquete} exacto que se desea descargar del camión.
+     */
     public void quitarVariosPaquetes(Paquete... viejosPaquetes){
         if(!listaDeEnvios.containsAll(List.of(viejosPaquetes))){
-            System.out.println("No todos los paquetes seleccionados se encuentran en el camión");
+            System.err.println("No todos los paquetes seleccionados se encuentran en el camión");
            mostrarDetallesPaquetesCamion();
         }
         else{
@@ -137,7 +157,7 @@ public class Camion{
      */
     public void vaciarCamion(){
         if(listaDeEnvios.size() == 0){
-            System.out.println("El camión ya se encuentra vacío");
+            System.err.println("El camión ya se encuentra vacío");
         }
         else{
             listaDeEnvios.clear();

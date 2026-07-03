@@ -46,6 +46,7 @@ public class Camion{
      * </p>
      * * @param nuevosPaquetes Un número variable de objetos {@code Paquete} (varargs) 
      * que se intentarán añadir al camión.
+     */
 
     //Metodo para meter varios paquetes
     public void agregarVariosPaquete(Paquete... nuevosPaquetes){

@@ -86,8 +86,6 @@ public class Camion{
      * * @param nuevosPaquetes Un número variable de objetos {@code Paquete} (varargs) 
      * que se intentarán añadir al camión.
      */
-
-    //Metodo para meter varios paquetes
     public void agregarVariosPaquete(Paquete... nuevosPaquetes){
         int totalFuturoCarga = listaDeEnvios.size() + nuevosPaquetes.length;
         if(totalFuturoCarga > this.capacidad){

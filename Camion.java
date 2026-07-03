@@ -37,11 +37,21 @@ public class Camion{
         }        
     }
 
+    /**
+     * Agrega múltiples paquetes al camión simultáneamente.
+     * <p>
+     * Este método calcula si la carga total excederá la capacidad máxima del camión
+     * antes de realizar la inserción. Si la capacidad se supera, no se añade ningún 
+     * paquete y se informa al usuario mediante un mensaje en consola.
+     * </p>
+     * * @param nuevosPaquetes Un número variable de objetos {@code Paquete} (varargs) 
+     * que se intentarán añadir al camión.
+
     //Metodo para meter varios paquetes
     public void agregarVariosPaquete(Paquete... nuevosPaquetes){
         int totalFuturoCarga = listaDeEnvios.size() + nuevosPaquetes.length;
         if(totalFuturoCarga > this.capacidad){
-            System.out.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d", this.capacidad, totalFuturoCarga);
+            System.out.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d\n", this.capacidad, totalFuturoCarga);
         }
         else{
             listaDeEnvios.addAll(List.of(nuevosPaquetes));
@@ -80,9 +90,16 @@ public class Camion{
     }
     //Método para comprobar que paquetes hay en el camión
     public void mostrarDetallesPaquetesCamion(){
-        for(Paquete p : listaDeEnvios){
-            p.mostrarDetalles();
-        }
+            if(listaDeEnvios.isEmpty()){
+                System.out.println("El camión está vacío");
+            }
+            else{
+                for(Paquete p : listaDeEnvios){
+                p.mostrarDetalles();
+                }
+            }
+            
+        
     }
 
 

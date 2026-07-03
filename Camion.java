@@ -6,18 +6,46 @@ public class Camion{
     private String matricula;
     private int capacidad;
 
-    //Constructor
+    // ==========================================
+    // CONSTRUCTORES
+    // ==========================================
+
+    /**
+     * Construye un nuevo Camión con una matrícula y capacidad máxima definidas.
+     * * @param matricula El identificador alfanumérico único del vehículo.
+     * @param capacidad La cantidad máxima de paquetes que puede albergar la lista de envíos.
+     */
     public Camion(String matricula, int capacidad){
         this.matricula = matricula;
         this.capacidad = capacidad;
     }
 
     //Getters y setter
+    /**
+     * Obtiene la matrícula actual del camión.
+     * * @return Un String que representa la matrícula identificativa del vehículo.
+     */
     public String getMatricula(){return this.matricula;}
+    /**
+     * Modifica la matrícula del camión por una nueva.
+     * * @param nuevaMatricula El nuevo String que se asignará como matrícula del camión.
+     */
     public void setMatricula(String nuevaMatricula){
         this.matricula = nuevaMatricula;
     }
+    /**
+     * Obtiene la capacidad máxima de paquetes permitida en el camión.
+     * * @return El número entero (int) que indica el límite de paquetes que puede cargar.
+     */
     public int getCapacidad(){return this.capacidad;}
+    /**
+     * Modifica la capacidad máxima del camión realizando una validación previa.
+     * <p>
+     * Si el valor introducido es menor que cero, se informa del error en consola 
+     * y no se altera el valor previo del atributo.
+     * </p>
+     * * @param nuevaCapacidad La nueva cantidad máxima de paquetes (debe ser 0 o positiva).
+     */
     public void setCapacidad(int nuevaCapacidad){
         if(nuevaCapacidad < 0){
             System.out.println("La capacidad del camión no puede ser 0 on negativa");
@@ -27,7 +55,18 @@ public class Camion{
         }
     }
 
-    //Metodo para meter paquetes dentro del camión uno a uno
+    // ==========================================
+    // MÉTODOS DE CARGA (INSERCIÓN)
+    // ==========================================
+
+    /**
+     * Añade un único paquete al camión si no se ha alcanzado el límite de capacidad.
+     * <p>
+     * Comprueba si el tamaño actual de la lista de envíos ya es igual o superior 
+     * a la capacidad máxima. Si está lleno, bloquea la inserción y muestra un mensaje en consola.
+     * </p>
+     * * @param nuevoPaquete El objeto {@code Paquete} que se desea cargar en el vehículo.
+     */
     public void agregarPaquete(Paquete nuevoPaquete){
         if(listaDeEnvios.size() >= this.capacidad){
             System.out.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d", this.capacidad, listaDeEnvios.size());
@@ -59,7 +98,18 @@ public class Camion{
         }        
     }
 
-    //Metodo para quitar paquetes uno a uno
+    // ==========================================
+    // MÉTODOS DE DESCARGA (ELIMINACIÓN)
+    // ==========================================
+
+    /**
+     * Elimina un paquete específico del camión de manera individual.
+     * <p>
+     * Primero verifica mediante {@code contains} si el paquete existe en la carga. 
+     * En caso negativo, no altera la lista y muestra un aviso detallando el error y la carga actual.
+     * </p>
+     * * @param viejoPaquete El objeto {@code Paquete} exacto que se desea descargar del camión.
+     */
     public void quitarPaquete(Paquete viejoPaquete){
         if(!listaDeEnvios.contains(viejoPaquete)){
             System.out.printf("El paquete que intentas eliminar no existe, actualmente hay este numero de paquetes %d\n", listaDeEnvios.size());
@@ -80,7 +130,13 @@ public class Camion{
             listaDeEnvios.removeAll(List.of(viejosPaquetes));
         }
     }
-    //Metodo para vaciar por completo el camión
+    /**
+     * Vacía por completo la carga de paquetes del camión, dejándolo limpio.
+     * <p>
+     * Evalúa si el camión ya se encuentra sin elementos. Si contiene carga, 
+     * utiliza el método nativo {@code clear()} para resetear la lista por completo.
+     * </p>
+     */
     public void vaciarCamion(){
         if(listaDeEnvios.size() == 0){
             System.out.println("El camión ya se encuentra vacío");
@@ -89,7 +145,17 @@ public class Camion{
             listaDeEnvios.clear();
         }
     }
-    //Método para comprobar que paquetes hay en el camión
+    // ==========================================
+    // MÉTODOS DE VISUALIZACIÓN Y DIAGNÓSTICO
+    // ==========================================
+
+    /**
+     * Recorre e imprime de manera detallada la información de cada paquete cargado.
+     * <p>
+     * Mediante un bucle for-each, accede secuencialmente a cada elemento del inventario 
+     * y delega la impresión en el método público {@code mostrarDetalles()} de cada paquete.
+     * </p>
+     */
     public void mostrarDetallesPaquetesCamion(){
             if(listaDeEnvios.isEmpty()){
                 System.out.println("El camión está vacío");

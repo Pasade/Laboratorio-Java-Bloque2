@@ -59,19 +59,19 @@ public class Camion{
     // ==========================================
     /**
      * Obtiene la matrícula actual del camión.
-     * * @return Un String que representa la matrícula identificativa del vehículo.
+     * @return Un String que representa la matrícula identificativa del vehículo.
      */
     public String getMatricula(){return this.matricula;}
     /**
      * Modifica la matrícula del camión por una nueva.
-     * * @param nuevaMatricula El nuevo String que se asignará como matrícula del camión.
+     * @param nuevaMatricula El nuevo String que se asignará como matrícula del camión.
      */
     public void setMatricula(String nuevaMatricula){
         this.matricula = nuevaMatricula;
     }
     /**
      * Obtiene la capacidad máxima de paquetes permitida en el camión.
-     * * @return El número entero (int) que indica el límite de paquetes que puede cargar.
+     * @return El número entero (int) que indica el límite de paquetes que puede cargar.
      */
     public int getCapacidad(){return this.capacidad;}
     /**
@@ -80,7 +80,7 @@ public class Camion{
      * Si el valor introducido es menor que cero, se informa del error en consola 
      * y no se altera el valor previo del atributo.
      * </p>
-     * * @param nuevaCapacidad La nueva cantidad máxima de paquetes (debe ser 0 o positiva).
+     * @param nuevaCapacidad La nueva cantidad máxima de paquetes (debe ser 0 o positiva).
      */
     public void setCapacidad(int nuevaCapacidad){
         if(nuevaCapacidad < 0){
@@ -92,7 +92,7 @@ public class Camion{
     }
     /**
      * Obtiene el peso máximo que soporta del camión.
-     * * @return Un double que representa lel peso máximo soportado por el vehículo.
+     * @return Un double que representa lel peso máximo soportado por el vehículo.
      */
     public double getPesoMaximo(){return this.pesoMaximo;}
     /**
@@ -147,7 +147,7 @@ public class Camion{
      * a la capacidad máxima. Si está lleno, bloquea la inserción y muestra un mensaje en consola.
      * Comprueba si el peso de los paquetes supera la carga máxima del camión
      * </p>
-     * * @param nuevoPaquete El objeto {@code Paquete} que se desea cargar.
+     * @param nuevoPaquete El objeto {@code Paquete} que se desea cargar.
      */
     public void agregarPaquete(Paquete nuevoPaquete){
         double pesoNuevoPAquete = calcularPesoActual() + nuevoPaquete.getPeso();
@@ -172,7 +172,7 @@ public class Camion{
      * antes de realizar la inserción. Si la capacidad se supera, no se añade ningún 
      * paquete y se informa al usuario mediante un mensaje en consola.
      * </p>
-     * * @param nuevosPaquetes Un número variable de objetos {@code Paquete} (varargs) 
+     * @param nuevosPaquetes Un número variable de objetos {@code Paquete} (varargs) 
      * que se intentarán añadir al camión.
      */
     public void agregarVariosPaquete(Paquete... nuevosPaquetes){
@@ -195,7 +195,7 @@ public class Camion{
      * Primero verifica mediante {@code contains} si el paquete existe en la carga. 
      * En caso negativo, no altera la lista y muestra un aviso detallando el error y la carga actual.
      * </p>
-     * * @param viejoPaquete El objeto {@code Paquete} exacto que se desea descargar del camión.
+     * @param viejoPaquete El objeto {@code Paquete} exacto que se desea descargar del camión.
      */
     public void quitarPaquete(Paquete viejoPaquete){
         if(!listaDeEnvios.contains(viejoPaquete)){
@@ -213,7 +213,7 @@ public class Camion{
      * Primero verifica mediante {@code contains} si alguno de los paquetes existe en la carga. 
      * En caso negativo, no altera la lista y muestra un aviso detallando el error y la carga actual.
      * </p>
-     * * @param viejosPaquetes El objeto {@code Paquete} exacto que se desea descargar del camión.
+     * @param viejosPaquetes El objeto {@code Paquete} exacto que se desea descargar del camión.
      */
     public void quitarVariosPaquetes(Paquete... viejosPaquetes){
         if(!listaDeEnvios.containsAll(List.of(viejosPaquetes))){
@@ -264,7 +264,7 @@ public class Camion{
     /**
      * Calcula y devuelve el peso total acumulado de todos los paquetes 
      * que se encuentran actualmente cargados en el camión.
-     * * @return El peso total de la carga en kilogramos (double).
+     * @return El peso total de la carga en kilogramos (double).
      */
     private double calcularPesoActual(){
         double pesoTotal = 0.0;
@@ -281,7 +281,7 @@ public class Camion{
      * Si el camión no dispone de suficiente combustible en el tanque para cubrir
      * el gasto estimado, el viaje se cancela para evitar que se quede varado.
      * </p>
-     * * @param kilometros La distancia total a recorrer en el viaje.
+     * @param kilometros La distancia total a recorrer en el viaje.
      */
     public void viajar(int kilometros) {
         // 1. Calcular el consumo dinámico

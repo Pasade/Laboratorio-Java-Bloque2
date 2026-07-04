@@ -9,13 +9,15 @@ import java.util.List;
  * vaciado y diagnóstico de la lista de envíos, controlando los límites
  * de capacidad máxima del vehículo.
  * </p>
- * * @author Jose Antonio Fernández Gago
+ *  @author Jose Antonio Fernández Gago
  * @version 1.0
  */
 public class Camion{
     private ArrayList<Paquete> listaDeEnvios = new ArrayList<>();
     private String matricula;
     private int capacidad;
+    private double pesoMaximo;
+    private double combustible;
 
     // ==========================================
     // CONSTRUCTORES
@@ -23,12 +25,33 @@ public class Camion{
 
     /**
      * Construye un nuevo Camión con una matrícula y capacidad máxima definidas.
-     * * @param matricula El identificador alfanumérico único del vehículo.
+     * Le adudica una capácidad máxima de peso estándar y el combustible al 100% por defecto
+     * @param matricula El identificador alfanumérico único del vehículo.
      * @param capacidad La cantidad máxima de paquetes que puede albergar la lista de envíos.
      */
     public Camion(String matricula, int capacidad){
         this.matricula = matricula;
         this.capacidad = capacidad;
+        this.pesoMaximo = 2000.0;
+        this. combustible = 100.0;
+    }
+
+    /**
+     * Construye un nuevo Camión especificando de forma detallada todos sus parámetros.
+     * <p>
+     * Este constructor permite configurar camiones a medida, definiendo límites personalizados
+     * de carga máxima en kilogramos y el estado inicial de su tanque de combustible.
+     * </p>
+     * @param matricula El identificador alfanumérico único del vehículo.
+     * @param capacidad La cantidad máxima de paquetes que puede albergar la lista de envíos.
+     * @param pesoMaximo El límite de carga total en kilogramos que soportan los ejes del camión.
+     * @param combustible La cantidad inicial de litros de combustible en el tanque.
+     */
+    public Camion(String matricula, int capacidad, double pesoMaximo, double combustible){
+        this.matricula = matricula;
+        this.capacidad = capacidad;
+        this.pesoMaximo = pesoMaximo;
+        this.combustible = combustible;
     }
 
     // ==========================================
@@ -61,32 +84,85 @@ public class Camion{
      */
     public void setCapacidad(int nuevaCapacidad){
         if(nuevaCapacidad < 0){
-            System.err.println("La capacidad del camión no puede ser 0 on negativa");
+            System.err.println("ERROR: La capacidad del camión no puede ser 0 on negativa");
         }
         else{
             this.capacidad = nuevaCapacidad;
         }
     }
+    /**
+     * Obtiene el peso máximo que soporta del camión.
+     * * @return Un double que representa lel peso máximo soportado por el vehículo.
+     */
+    public double getPesoMaximo(){return this.pesoMaximo;}
+    /**
+     * Modifica el peso máximo que soporta el camión realizando una validación previa
+     * <p>
+     * Si el valor introducido es menor que 0 se informa con un mensaje de error
+     * y no se altera el valor previo del atributo
+     * <p>
+     * @param nuevoPesoMaximo el nuevo peso máximo soportado por el vehículo (debe ser 0 o positivo)
+     */
+    public void setPesoMaximo(double nuevoPesoMaximo){
+        if(nuevoPesoMaximo < 0){
+            System.err.printf("ERROR: el peso máximo soportado no puede ser 0 o negativo");
+        }
+        else{
+            this.pesoMaximo = nuevoPesoMaximo;
+        }        
+    }
+    /**
+     * Obtiene la cantidad de combustible del vehículo (En Litros)
+     * @return un double que representa la cantidad de combustible disponible en el vehículo (en Litros)
+     */
+    public double getCombustible(){return this.combustible;}
+    /**
+     * Modifica la cantidad de combustible disponible en el vehículo realizando una validación previa
+     * <p>
+     * Si el valor introducido es menor que 0 o mayor que 100
+     * se informa al usuario con un mensaje de error
+     * y no se altera el valor previo del atributo
+     * <p>
+     * @param nuevoCombustible la nueva cantidad de combustible en el vehículo
+     */
+    public void setCombustible(double nuevoCombustible){
+        if(nuevoCombustible < 0 || nuevoCombustible > 100){
+            System.err.printf("ERROR: el combustible no puede ser inferior a 0 o superior al 100%");
+        }
+        else{
+            this.combustible = nuevoCombustible;
+        }
+    }
+
+
 
     // ==========================================
     // MÉTODOS DE CARGA (INSERCIÓN)
     // ==========================================
 
     /**
-     * Añade un único paquete al camión si no se ha alcanzado el límite de capacidad.
+     * Añade un único paquete al camión si no se ha alcanzado el límite de capacidad o sobrepasado el peso soportado.
      * <p>
      * Comprueba si el tamaño actual de la lista de envíos ya es igual o superior 
      * a la capacidad máxima. Si está lleno, bloquea la inserción y muestra un mensaje en consola.
+     * Comprueba si el peso de los paquetes supera la carga máxima del camión
      * </p>
-     * * @param nuevoPaquete El objeto {@code Paquete} que se desea cargar en el vehículo.
+     * * @param nuevoPaquete El objeto {@code Paquete} que se desea cargar.
      */
     public void agregarPaquete(Paquete nuevoPaquete){
+        double pesoNuevoPAquete = calcularPesoActual() + nuevoPaquete.getPeso();
         if(listaDeEnvios.size() >= this.capacidad){
-            System.err.printf("Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d", this.capacidad, listaDeEnvios.size());
+            System.err.printf("ERROR: Capacidad del camión superada, la capacidad actual es de %d e intentas meter %d", this.capacidad, listaDeEnvios.size());
         }
         else{
             listaDeEnvios.add(nuevoPaquete);
-        }        
+        }
+        if(pesoNuevoPAquete > this.pesoMaximo){
+            System.err.printf("ERROR: superado el peso máximo soportado por el camión");
+        }
+        else{
+            listaDeEnvios.add(nuevoPaquete);
+        }
     }
 
     /**
@@ -182,9 +258,50 @@ public class Camion{
                 for(Paquete p : listaDeEnvios){
                 p.mostrarDetalles();
                 }
-            }
-            
+            }          
         
+    }
+    /**
+     * Calcula y devuelve el peso total acumulado de todos los paquetes 
+     * que se encuentran actualmente cargados en el camión.
+     * * @return El peso total de la carga en kilogramos (double).
+     */
+    private double calcularPesoActual(){
+        double pesoTotal = 0.0;
+        for(Paquete p : listaDeEnvios){
+            pesoTotal += p.getPeso();
+        }
+        return pesoTotal;
+    }
+
+    /**
+     * Simula un viaje de una distancia determinada en kilómetros, consumiendo
+     * combustible de forma dinámica según el peso actual de la carga.
+     * <p>
+     * Si el camión no dispone de suficiente combustible en el tanque para cubrir
+     * el gasto estimado, el viaje se cancela para evitar que se quede varado.
+     * </p>
+     * * @param kilometros La distancia total a recorrer en el viaje.
+     */
+    public void viajar(int kilometros) {
+        // 1. Calcular el consumo dinámico
+        double consumoBase = kilometros * 0.1;
+        double consumoPorCarga = calcularPesoActual() * 0.005 * kilometros;
+        double totalCombustibleNecesario = consumoBase + consumoPorCarga;
+
+        System.out.printf("Iniciando ruta de %d km... Combustible actual: %.2fL\n", kilometros, this.combustible);
+        System.out.printf("Consumo estimado para este viaje: %.2fL\n", totalCombustibleNecesario);
+
+        // 2. Validación de seguridad: ¿Tenemos suficiente combustible?
+        if (totalCombustibleNecesario > this.combustible) {
+            System.err.printf("ERROR: Combustible insuficiente. Necesitas %.2fL y solo quedan %.2fL. ¡Reposta antes de salir!\n", 
+                              totalCombustibleNecesario, this.combustible);
+            return; // Bloqueamos el viaje
+        }
+
+        // 3. Si pasa la validación, el camión viaja y consume
+        this.combustible -= totalCombustibleNecesario;
+        System.out.printf("¡Viaje completado con éxito! Combustible restante en el tanque: %.2fL\n", this.combustible);
     }
 
 

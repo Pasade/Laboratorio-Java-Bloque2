@@ -57,7 +57,7 @@ public class Pallet extends Carga{
      */
     @Override
     public double calcularVolumen(){
-        double base = esEuropeo ? (1.2 + 0.8) : (1.2 + 1.10);
+        double base = esEuropeo ? (1.2 * 0.8) : (1.2 * 1.10);
         return base + altoMercancia;
     }
 
@@ -67,7 +67,7 @@ public class Pallet extends Carga{
      */
     @Override
     public String toString(){
-        return String.format("%s | Es una pallet Europeo: %s | Altura de la mercancia: %.2f cm", super.toString(), esEuropeo, altoMercancia);
+        return String.format("%s | Es una pallet Europeo: %s | Altura de la mercancia: %.2f m", super.toString(), esEuropeo, altoMercancia);
     }
 
 

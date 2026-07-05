@@ -33,7 +33,7 @@ public class Paquete extends Carga{
     /**
      * Modifica el tipo de paquete
      */
-    public void tipoPaquete(String nuevoTipoPaquete){
+    public void setTipoPaquete(String nuevoTipoPaquete){
         this.tipoPaquete = nuevoTipoPaquete;
     }
     /**
@@ -43,11 +43,12 @@ public class Paquete extends Carga{
      * y no se altera el valor previo del atributo
      */
     public void setVolumenM3(double nuevoVolumenM3){
-        if(nuevoVolumenM3 < 0){
-            System.err.println("❌ ERROR: lel volumen del paquete no puede ser menor o igual a 0.");
+        if(nuevoVolumenM3 > 0){
+             this.volumenM3 = nuevoVolumenM3;
         }
         else{
-            this.volumenM3 = nuevoVolumenM3;}
+            System.err.println("❌ ERROR: lel volumen del paquete no puede ser menor o igual a 0.");           
+        }
     }
 
     /**

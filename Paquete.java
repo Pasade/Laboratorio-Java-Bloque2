@@ -18,6 +18,38 @@ public class Paquete extends Carga{
         this.volumenM3 = volumenM3;
     }
 
+    //Getters y Setters
+    /**
+     * Obtiene el tipo de paquete
+     * @return Devuelve un String con el tipo de paquete
+     */
+    public String getTipoPaquete(){return this.tipoPaquete;}
+    /**
+     * Obtiene el volumen del paquete
+     * @return Devuelve un double con el volumen del paquete
+     */
+    public double getVolumenM3(){return this.volumenM3;}
+
+    /**
+     * Modifica el tipo de paquete
+     */
+    public void tipoPaquete(String nuevoTipoPaquete){
+        this.tipoPaquete = nuevoTipoPaquete;
+    }
+    /**
+     * Modifica el volumen del paquete reailzando una validacion previa
+     * <p>
+     * Si el volumen del paquete es inferior a cero, se uestra un mensaje de error
+     * y no se altera el valor previo del atributo
+     */
+    public void setVolumenM3(double nuevoVolumenM3){
+        if(nuevoVolumenM3 < 0){
+            System.err.println("❌ ERROR: lel volumen del paquete no puede ser menor o igual a 0.");
+        }
+        else{
+            this.volumenM3 = nuevoVolumenM3;}
+    }
+
     /**
      * Funcion que obligada por contrato con la clase padre
      * <p>
@@ -35,14 +67,8 @@ public class Paquete extends Carga{
      * @return Strin
      */
     @Override
-    public String ToString(){
-        return super.ToString() + " | Tipo: " + tipoPaquete + " | Vol: " + volumenM3 + "m³";
+    public String toString(){
+        return String.format("%s | Tipo: %s | Vol: %.3f m³", super.toString(), tipoPaquete, volumenM3);
     }
 
-
-    //Función de la clase
-    public void mostrarDetalles(){
-    System.out.println("📦 PAQUETE [" + codigoDeSeguimiento + "] con destino a " + destino + " (" + peso + " kg).");       
-    }
-    
 }

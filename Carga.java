@@ -32,6 +32,14 @@ public abstract class Carga{
      */
     public abstract double calcularVolumen();
 
+    /**
+     * Contrato obligatorio para las clases hijas
+     * Cada clase mostrará los detalles de su carga 
+     */
+    public void mostrarDetalles(){
+        System.out.println(this.toString());
+    };
+
     //Getters y Setters
     /**
      * Obtiene el codigo de seguimiento
@@ -67,7 +75,7 @@ public abstract class Carga{
         }
         else
         {
-            System.out.println("❌ ERROR: El peso de un paquete no puede ser menor o igual a 0.");
+            System.err.println("❌ ERROR: El peso de un paquete no puede ser menor o igual a 0.");
         }
     }
 
@@ -76,7 +84,7 @@ public abstract class Carga{
      * @return String
      */
     @Override
-    public String ToString(){
+    public String toString(){
         return String.format("[%s] Destino: %s | Peso: %.2f kg",this.codigoDeSeguimiento, this.destino, this.peso);
     }
 

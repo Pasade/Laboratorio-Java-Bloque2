@@ -2,7 +2,7 @@ public class Principal {
     
     public static void main(String[] args) {
 
-        //Prueba de funciones en un archivo a parte
+        /*Prueba de funciones en un archivo a parte
         Funciones.bienvenidaGestorEnvios();
 
         //Usamos los constructores para crear objetos
@@ -42,6 +42,7 @@ public class Principal {
         // 3. Intentar un viaje larguísimo para forzar la validación de combustible
         System.out.println("\n--- INICIANDO SEGUNDO VIAJE (PRUEBA DE LÍMITE) ---");
         c2.viajar(900); // Esto debería calcular un consumo enorme y ser rechazado
+        */
 
         
 

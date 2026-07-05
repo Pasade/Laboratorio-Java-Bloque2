@@ -1,47 +1,48 @@
-//Molde o plan0 (Clase)
-public class Paquete{
+/**
+ * Clase hija que estiende de la clase padre Carga
+ * <p>
+ * Esta clase se encarga de definir los paquetes
+ */
+public class Paquete extends Carga{
 
     //Atributos de la clase
-    private final String codigoSeguimiento;
-    private double peso;
-    private String destino;
+    private String tipoPaquete;
+    private double volumenM3;
 
-    //Constructor cuando sabemos Toda la informacion
-    public Paquete(double peso, String destino){
-        this.codigoSeguimiento = java.util.UUID.randomUUID().toString().substring(0, 8);
-        setPeso(peso);
-        setDestino(destino);
+    /**
+     * Construye un objeto del tipo paquete con los atributos heredados del padre y los suyos propios
+     */
+    public Paquete(double peso, String destino, String tipoPaquete, double volumenM3){
+        super(peso, destino);
+        this.tipoPaquete = tipoPaquete;
+        this.volumenM3 = volumenM3;
     }
 
-    //Constructor cuando nos falta el dato destino
-    public Paquete(double peso){
-        this.codigoSeguimiento = java.util.UUID.randomUUID().toString().substring(0, 8);
-        setPeso(peso);
-        setDestino("Pendiente de clasificación");
+    /**
+     * Funcion que obligada por contrato con la clase padre
+     * <p>
+     * Calcula el volumen en metros 3
+     * <p>
+     * @return Double con el volumen del paquete
+     */
+    @Override
+    public double calcularVolumen(){
+        return this.volumenM3;
     }
 
-    //Getters y Setters
-    public String getCodigoDeSeguimiento(){return this.codigoSeguimiento;}
-
-    public String getDestino(){return this.destino;}
-    public void setDestino(String nuevoDestino){this.destino = nuevoDestino;}
-
-    public double getPeso(){return this.peso;}
-    public void setPeso(double nuevoPeso){
-        if(nuevoPeso > 0)
-        {
-            this.peso = nuevoPeso;
-        }
-        else
-        {
-            System.out.println("❌ ERROR: El peso de un paquete no puede ser menor o igual a 0.");
-        }
+    /**
+     * Sobreescritura de ToString para agregar la información unaca del paquete
+     * @return Strin
+     */
+    @Override
+    public String ToString(){
+        return super.ToString() + " | Tipo: " + tipoPaquete + " | Vol: " + volumenM3 + "m³";
     }
 
 
     //Función de la clase
     public void mostrarDetalles(){
-    System.out.println("📦 PAQUETE [" + codigoSeguimiento + "] con destino a " + destino + " (" + peso + " kg).");       
+    System.out.println("📦 PAQUETE [" + codigoDeSeguimiento + "] con destino a " + destino + " (" + peso + " kg).");       
     }
-
+    
 }

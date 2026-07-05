@@ -1,1 +1,10 @@
-unnamed package
+domain.aereos
+domain.app
+domain.base
+domain.cargas
+domain.enums
+domain.gestion
+domain.interfaces
+domain.navales
+domain.terrestres
+domain.util

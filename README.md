@@ -1,2 +1,2 @@
-# Laboratorio-Java-Bloque3
-Aprendiendo Java con Gemini - Bloque 3
+# Laboratorio-Java-Logistica
+Aprendiendo con IAs (Gemini, ChatGPT y CLoude)

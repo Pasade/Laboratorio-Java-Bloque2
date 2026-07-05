@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Clase hija que estiende de la clase padre Carga
  * <p>
@@ -6,6 +8,7 @@
 public class Pallet extends Carga{
     private boolean esEuropeo;
     private double altoMercancia;
+    private List<Paquete> paquetes = new ArrayList<>();
 
     /**
      * Construye un objeto del tipo pallet con los atributos heredados del padre y los suyos propios

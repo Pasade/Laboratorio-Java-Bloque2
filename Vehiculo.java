@@ -1,33 +1,44 @@
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Representa una clase abstracta base para la gestión de tipos de vehículos.
  * Proporciona la estructura común y los métodos obligatorios que deben 
  * implementar las subclases concretas.
  * 
  * <p>Esta clase no puede ser instanciada directamente. Las clases hijas 
- * deben implementar el método {@link #calcularVolumen()}.
+ * deben implementar el método {@link}.
  *
  * @author Jose Antonio Gago
  * @version 1.0
  * @since 07/2026
  */
 public abstract class Vehiculo{
-    private String matricula;
-    private double capacidadTanqueLitros;
+    private String idVehiculo;
+    private String marca;
+    private String modelo;
+    private String estado;
+    private double capacidadTanque;
     private double nivelCombustibleLitros;
-    private double pesoMaximo;
-    private int capacidadMaxima;
+    private double consumoPorKilometro;
+    private double cargaMaximaKilos;
+    private double capacidadMaximaVolumen;
+    private List<Carga> cargas = new ArrayList<>();
 
     /**
      * Construye un nuevo objeto de tipo vehiculo con los atrubutos compartidos por las clases hijas
-     * matricula, combustible, pesoMaximo, capacidadMaxima
+     * idVehiculo, combustible, cargaMaximaKilos, capacidadMaximaVolumen
      */
-    public Vehiculo(String matricula, double capacidadTanqueLitros, double nivelCombustibleLtros,
-    double pesoMaximo, int capacidadMaxima){
-        this.matricula = matricula;
-        this.capacidadTanqueLitros = capacidadTanqueLitros;
+    public Vehiculo(String idVehiculo, String marca, String modelo, String estado, double capacidadTanque, double nivelCombustibleLitros,
+    double consumoPorKilometro, double cargaMaximaKilos, double capacidadMaximaVolumen){
+        this.idVehiculo = idVehiculo;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.estado = estado;
+        this.capacidadTanque = capacidadTanque;
         this.nivelCombustibleLitros = nivelCombustibleLitros;
-        this.pesoMaximo = pesoMaximo;
-        this.capacidadMaxima = capacidadMaxima;
+        this.consumoPorKilometro = consumoPorKilometro;
+        this.cargaMaximaKilos = cargaMaximaKilos;
+        this.capacidadMaximaVolumen = capacidadMaximaVolumen;
     }
 
     //Getters y Setters
@@ -36,40 +47,40 @@ public abstract class Vehiculo{
      * Obtiene la matrícula
      * @return Devuelve un String con la matrícula
      */
-    public String getMatricula(){return this.matricula;}
+    public String getidVehiculo(){return this.idVehiculo;}
     /**
      * Obtiene el combustible del vehículo
-     * @return Devuelve un double con el combustible del vehículo
+     * @return Devuelve un double con la capacidad del tanque de combustible del vehículo
      */
-    public double getCapacidadTanqueLitros(){return this.capacidadTanqueLitros;}
+    public double getcapacidadTanque(){return this.capacidadTanque;}
     /**
      * Obtiene nivel actual de combustible en litros
      * @return Devuelve un double con los litros actuales en el depósito
      */
     public double getNivelCombustibleLitros(){return this.nivelCombustibleLitros;}
     /**
-     * Obtiene el peso máximo permitido por el vehículo
-     * @return Devuelve un double con el peso máximo soportdo por el vehículo
+     * Obtiene la carga máxima soportada por el vehículo
+     * @return Devuelve un double con la carga máxima soportda por el vehículo
      */
-    public double getPesoMaximo(){return this.pesoMaximo;}
+    public double getcargaMaximaKilos(){return this.cargaMaximaKilos;}
     /**
-     * Obtiene la capacidad máxima en numero de elementos soportados por el vehículo
-     * @return Devuelve un int con la cacidad máxima del vehículo
+     * Obtiene la capacidad máxima de volumen soportada por el vehículo
+     * @return Devuelve un double con la cacidad máxima del vehículo
      */
-    public int getCapacidadMaxima(){return this.capacidadMaxima;}
+    public double getcapacidadMaximaVolumen(){return this.capacidadMaximaVolumen;}
     /**
-     * Modifica la matrícula del vehículo (En caso por ejemplo de un vehículo del extranjero que se matricula en España)
-     * @param nuevaMatricula la nueva matrícula del vehículo
+     * Modifica el Id  del vehículo 
+     * @param nuevaidVehiculo la nueva matrícula del vehículo
      */
-    public void setMAtricula(String nuevaMatricula){
-        this.matricula = nuevaMatricula;
+    public void setidVehiculo(String nuevaidVehiculo){
+        this.idVehiculo = nuevaidVehiculo;
     }
     /**
      * Modifica la capacidad en litros del tanque del vehículo (si se substituye por ejemplo por una avería)
-     * @param nuevaCapacidadTanqueLitros la nueva capacidad en litros del depósito del vehículo
+     * @param nuevacapacidadTanque la nueva capacidad en litros del depósito del vehículo
      */
-    public void setCapacidadTanqueLitros(double nuevaCapacidadTanqueLitros){
-        this.capacidadTanqueLitros = nuevaCapacidadTanqueLitros;
+    public void setcapacidadTanque(double nuevacapacidadTanque){
+        this.capacidadTanque = nuevacapacidadTanque;
     }
     /**
      * Modifica la cantidad actual de litros en el tanque pasando por una validación previa
@@ -80,11 +91,11 @@ public abstract class Vehiculo{
      * @param nuevoNivelCombustibleLitros el nuevo peso
      */
     public void setNivelCombustibleLitros(double nuevoNivelCombustibleLitros){
-        if(nuevoNivelCombustibleLitros <= 0 || nuevoNivelCombustibleLitros > capacidadTanqueLitros){
+        if(nuevoNivelCombustibleLitros <= 0 || nuevoNivelCombustibleLitros > capacidadTanque){
             System.err.printf("ERROR: la cantidad de litros no puede ser 0 o superar la cantidad permitida por el tanque del vehículo\n");
         }
         else{
-            this.capacidadTanqueLitros = nuevoNivelCombustibleLitros;
+            this.nivelCombustibleLitros = nuevoNivelCombustibleLitros;
         }
     }
     /**
@@ -93,14 +104,14 @@ public abstract class Vehiculo{
      * Si el valor introducido es menor que cero o cero
      * muestra un error y no se altera el valor previo del atributo
      * en caso positivo, substituye el valor anterior
-     * @param nuevoPesoMaximo el nuevo peso
+     * @param nuevacargaMaximaKilos el nuevo peso
      */
-    public void setPesoMaximo(double nuevoPesoMaximo){
-        if(nuevoPesoMaximo <= 0){
+    public void setcargaMaximaKilos(double nuevacargaMaximaKilos){
+        if(nuevacargaMaximaKilos <= 0){
             System.err.printf("El valor del peso máximo no puede ser 0 o inferior a 0\n");
         }
         else{
-            this.pesoMaximo = nuevoPesoMaximo;
+            this.cargaMaximaKilos = nuevacargaMaximaKilos;
         }
     }
     /**
@@ -109,15 +120,18 @@ public abstract class Vehiculo{
      * Si el valor introducido es menor que cero o cero
      * muestra un error y no se altera el valor previo del atributo
      * en caso positivo, substituye el valor anterior
-     * @param nuevCapacidadMaxima el nuevo peso
+     * @param nuevcapacidadMaximaVolumen el nuevo peso
      */
-    public void setCapacidadMaxima(int nuevaCapacidadMaxima){
-        if(nuevaCapacidadMaxima <= 0){
+    public void setcapacidadMaximaVolumen(int nuevacapacidadMaximaVolumen){
+        if(nuevacapacidadMaximaVolumen <= 0){
             System.err.printf("El valor de la capacidad máxima no puede ser 0 o inferior a 0\n");
         }
         else{
-            this.capacidadMaxima = nuevaCapacidadMaxima;
+            this.capacidadMaximaVolumen = nuevacapacidadMaximaVolumen;
         }
     }
+
+
+
 
 }

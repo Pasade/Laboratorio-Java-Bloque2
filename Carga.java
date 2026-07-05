@@ -26,20 +26,6 @@ public abstract class Carga{
         setDestino(destino);
     }
 
-    /**
-     * Contrato obligatorio para las clases hijas
-     * Cada clase calculará el Volumen en metros cuadrados 
-     */
-    public abstract double calcularVolumen();
-
-    /**
-     * Contrato obligatorio para las clases hijas
-     * Cada clase mostrará los detalles de su carga 
-     */
-    public void mostrarDetalles(){
-        System.out.println(this.toString());
-    };
-
     //Getters y Setters
     /**
      * Obtiene el codigo de seguimiento
@@ -61,7 +47,7 @@ public abstract class Carga{
     * @return Devuelve un double con el peso 
     */
     public double getPeso(){return this.peso;}
-      /**
+     /**
      * Modifica el peso realizando una validación previa
      * <p>
      * Si el valor introducido es menor que cero se genera un error
@@ -78,6 +64,20 @@ public abstract class Carga{
             System.err.println("❌ ERROR: El peso de un paquete no puede ser menor o igual a 0.");
         }
     }
+
+    /**
+     * Contrato obligatorio para las clases hijas
+     * Cada clase calculará el Volumen en metros cuadrados 
+     */
+    public abstract double calcularVolumen();
+
+    /**
+     * Contrato obligatorio para las clases hijas
+     * Cada clase mostrará los detalles de su carga 
+     */
+    public void mostrarDetalles(){
+        System.out.println(this.toString());
+    };
 
     /**
      * Sobreescritura del metodo ToString de la clase Object para una impresión limpia
